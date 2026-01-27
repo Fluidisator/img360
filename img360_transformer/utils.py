@@ -12,20 +12,20 @@ def rotate_360_image(img, pitch, yaw, roll):
     Rx = np.array(
         [
             [1, 0, 0],
-            [0, np.cos(pitch), -np.sin(pitch)],
-            [0, np.sin(pitch), np.cos(pitch)],
+            [0, np.cos(roll), -np.sin(roll)],
+            [0, np.sin(roll), np.cos(roll)],
         ]
     )
 
     Ry = np.array(
-        [[np.cos(yaw), 0, np.sin(yaw)], [0, 1, 0], [-np.sin(yaw), 0, np.cos(yaw)]]
+        [[np.cos(pitch), 0, np.sin(pitch)], [0, 1, 0], [-np.sin(pitch), 0, np.cos(pitch)]]
     )
 
     Rz = np.array(
-        [[np.cos(roll), -np.sin(roll), 0], [np.sin(roll), np.cos(roll), 0], [0, 0, 1]]
+        [[np.cos(yaw), -np.sin(yaw), 0], [np.sin(yaw), np.cos(yaw), 0], [0, 0, 1]]
     )
 
-    R = Rz @ Ry @ Rx  # Apply Roll → Yaw → Pitch order
+    R = Rz @ Ry @ Rx  # Apply Yaw → Pitch → Roll order
 
     lon = (np.linspace(0, width - 1, width) / width) * 2 * np.pi - np.pi
     lat = (np.linspace(0, height - 1, height) / height) * np.pi - np.pi / 2
