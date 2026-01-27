@@ -7,7 +7,7 @@ import cv2
 from .utils import rotate_360_image
 
 
-def process_image(image_path, pitch, yaw, roll):
+def process_image(image_path, pitch, yaw, roll, quality=95, compression=1):
     img = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
     if img is None:
         print(f"Error loading image {image_path}")
@@ -21,9 +21,9 @@ def process_image(image_path, pitch, yaw, roll):
 
     # Ensure high-quality saving
     if file_extension in [".jpg", ".jpeg"]:
-        cv2.imwrite(save_path, rotated_img, [cv2.IMWRITE_JPEG_QUALITY, 100])
+        cv2.imwrite(save_path, rotated_img, [cv2.IMWRITE_JPEG_QUALITY, quality])
     elif file_extension == ".png":
-        cv2.imwrite(save_path, rotated_img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+        cv2.imwrite(save_path, rotated_img, [cv2.IMWRITE_PNG_COMPRESSION, compression])
     else:
         cv2.imwrite(save_path, rotated_img)
 
@@ -33,4 +33,4 @@ def process_image(image_path, pitch, yaw, roll):
     else:
         print("ExifTool is not installed or not found in PATH. Image metadata will not be copied.")
 
-    print(f"Image saved as {save_path} with maximum quality!")
+    print(f"Image saved as {save_path} with JPEG quality of {quality} and PNG compression of {compression}!")
