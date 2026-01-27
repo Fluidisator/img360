@@ -18,7 +18,11 @@ def rotate_360_image(img, pitch, yaw, roll):
     )
 
     Ry = np.array(
-        [[np.cos(pitch), 0, np.sin(pitch)], [0, 1, 0], [-np.sin(pitch), 0, np.cos(pitch)]]
+        [
+            [np.cos(pitch), 0, np.sin(pitch)],
+            [0, 1, 0],
+            [-np.sin(pitch), 0, np.cos(pitch)],
+        ]
     )
 
     Rz = np.array(

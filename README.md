@@ -62,12 +62,12 @@ python main.py --help
 ### On Windows
 
 You may encounter the following error when running the program on Windows:
+
 ```
 ImportError: DLL load failed: The specified module could not be found.
 ```
 
 If this happens on Windows, make sure you have Visual C++ redistributable 2015 installed. If you are using older Windows version than Windows 10 and latest system updates are not installed, Universal C Runtime might be also required.
-
 
 ## License
 
@@ -75,4 +75,12 @@ This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE
 
 ## Contributing
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on code formatting (Black, isort).
+
 Contributions are welcome! Please open an issue or submit a pull request on GitHub.
+
+## Project Notes
+
+- See [TODO.md](TODO.md) for planned features and ideas, including:
+  - Implementation (or embedding) of a real 3D sphere image viewer
+  - Exif metadata support

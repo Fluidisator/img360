@@ -1,4 +1,3 @@
-
 import os
 
 import cv2
@@ -19,9 +18,7 @@ def launch_ui(image_path):
         pass
 
     # Create trackbars for Roll, Pitch, and Yaw
-    cv2.createTrackbar(
-        "Pitch", "360 Image Rotation", 0, 180, do_nothing
-    )  # -180 to 180
+    cv2.createTrackbar("Pitch", "360 Image Rotation", 0, 180, do_nothing)  # -180 to 180
     cv2.setTrackbarMin("Pitch", "360 Image Rotation", -180)
 
     cv2.createTrackbar("Yaw", "360 Image Rotation", 0, 180, do_nothing)  # -180 to 180

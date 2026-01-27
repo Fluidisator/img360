@@ -1,5 +1,5 @@
-import glob
 import argparse
+import glob
 
 from img360_transformer.batch_process import process_image
 from img360_transformer.gui import launch_ui

@@ -31,6 +31,10 @@ def process_image(image_path, pitch, yaw, roll, quality=95, compression=1):
         subprocess.run(["exiftool", "-TagsFromFile", image_path, save_path], check=True)
         os.remove(f"{save_path}_original")
     else:
-        print("ExifTool is not installed or not found in PATH. Image metadata will not be copied.")
+        print(
+            "ExifTool is not installed or not found in PATH. Image metadata will not be copied."
+        )
 
-    print(f"Image saved as {save_path} with JPEG quality of {quality} and PNG compression of {compression}!")
+    print(
+        f"Image saved as {save_path} with JPEG quality of {quality} and PNG compression of {compression}!"
+    )
