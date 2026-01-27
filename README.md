@@ -17,20 +17,20 @@
 To use the command-line interface, run the following command:
 
 ```sh
-python main.py -p <pitch> -y <yaw> -r <roll> -l <image1_or_glob> [<image2_or_glob> ...]
+python main.py -p <pitch> -y <yaw> -r <roll> -i <image1_or_glob> [<image2_or_glob> ...]
 ```
 
 - `--pitch` or `-p`: The pitch adjustment in degrees, float value.
 - `--yaw` or `-y`: The yaw adjustment in degrees.
 - `--roll` or `-r`: The roll adjustment in degrees.
-- `--list_of_pictures` or `-l`: Path to images or a glob pattern to match multiple images.
+- `--pictures` or `-i`: Path to images or a glob pattern to match multiple images.
 - Optional `--quality` or `-q`: Quality of JPEG set to save the output picture, integer from 0 to 100, default 95.
 - Optional `--compression` or `-c`: Compression of PNG set to save the output picture, integer from 0 to 10, default 1.
 
 Example:
 
 ```sh
-python main.py -p 0 -r -30 -y 0 -q 90 -l "images/*.jpg"
+python main.py -p 0 -r -30 -y 0 -q 90 -i "images/*.jpg"
 ```
 
 ### Graphical User Interface
@@ -38,15 +38,15 @@ python main.py -p 0 -r -30 -y 0 -q 90 -l "images/*.jpg"
 To launch the graphical user interface, run the following command:
 
 ```sh
-python main.py -l <image>
+python main.py -i <image>
 ```
 
-- `--list_of_pictures` or `-l`: Path to images or a glob pattern to match multiple images, will open only the first if a list is given
+- `--pictures` or `-i`: Path to images or a glob pattern to match multiple images, will open only the first if a list is given and no pitch, yaw, roll are provided.
 
 Example:
 
 ```sh
-python main.py -l "images/sample.jpg"
+python main.py -i "images/sample.jpg"
 ```
 
 ### Help
