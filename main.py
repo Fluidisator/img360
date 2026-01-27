@@ -1,45 +1,78 @@
 import glob
-import os
-import sys
+import argparse
 
 from img360_transformer.batch_process import process_image
 from img360_transformer.gui import launch_ui
 
 
+def _get_parser():
+    parser = argparse.ArgumentParser(description="Horizon correcter")
+
+    parser.add_argument(
+        "--pitch", "-p", type=float, help="Pitch correction to apply to the picture"
+    )
+    parser.add_argument(
+        "--roll", "-r", type=float, help="Roll correction to apply to the picture"
+    )
+    parser.add_argument(
+        "--yaw", "-y", type=float, help="Yaw correction to apply to the picture"
+    )
+    parser.add_argument(
+        "--quality",
+        "-q",
+        type=int,
+        choices=range(0, 101),
+        default=95,
+        help="Quality value to save a jpeg picture, integer from 0 to 100",
+    )
+    parser.add_argument(
+        "--compression",
+        "-c",
+        type=int,
+        choices=range(0, 11),
+        default=1,
+        help="Compression value to save a png picture, integer from 0 to 10",
+    )
+    parser.add_argument(
+        "--pictures",
+        "-i",
+        type=str,
+        nargs="+",
+        help="Path to the picture or list of path",
+    )
+    return parser
+
+
 def main():
-    if len(sys.argv) == 2 and sys.argv[1] == "--help":
-        print(
-            "Usage: \npython main.py"
-            + " <pitch> <yaw> <roll> <image1_or_glob> [<image2_or_glob> ...]"
-        )
-        print("Or with GUI: python main.py <image>")
-        sys.exit(0)
+    args = _get_parser().parse_args()
 
-    if len(sys.argv) == 2:
-        if not os.path.exists(sys.argv[1]):
-            print(f"Error: {sys.argv[1]} not found!")
-            sys.exit(1)
-        launch_ui(sys.argv[1])
-        sys.exit(0)
+    if not args.pictures:
+        print("No picture provided!")
+        return
 
-    if len(sys.argv) < 5:
-        print(
-            "Usage: python main.py"
-            + " <pitch> <yaw> <roll> <image1_or_glob> [<image2_or_glob> ...]"
-        )
-        sys.exit(1)
-
-    pitch = int(sys.argv[1])
-    yaw = int(sys.argv[2])
-    roll = int(sys.argv[3])
-    image_patterns = sys.argv[4:]
+    should_display_gui = None in (args.pitch, args.roll, args.yaw)
 
     image_paths = []
-    for pattern in image_patterns:
+    for pattern in args.pictures:
         image_paths.extend(glob.glob(pattern))
 
-    for image_path in image_paths:
-        process_image(image_path, pitch, yaw, roll)
+    # Check if there is any picture to open
+    if len(image_paths) > 0:
+        if should_display_gui:
+            print("Will open the GUI on the first picture")
+            launch_ui(image_paths[0])
+        else:
+            for image_path in image_paths:
+                process_image(
+                    image_path,
+                    args.pitch,
+                    args.yaw,
+                    args.roll,
+                    args.quality,
+                    args.compression,
+                )
+    else:
+        print("No picture found!")
 
 
 if __name__ == "__main__":
