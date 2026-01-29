@@ -29,7 +29,7 @@ def rotate_360_image(img, pitch, yaw, roll):
         [[np.cos(yaw), -np.sin(yaw), 0], [np.sin(yaw), np.cos(yaw), 0], [0, 0, 1]]
     )
 
-    R = Rz @ Ry @ Rx  # Apply Yaw → Pitch → Roll order
+    R = Rx @ Ry @ Rz  # Apply Roll → Pitch → Yaw order
 
     lon = (np.linspace(0, width - 1, width) / width) * 2 * np.pi - np.pi
     lat = (np.linspace(0, height - 1, height) / height) * np.pi - np.pi / 2
